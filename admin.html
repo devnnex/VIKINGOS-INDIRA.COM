@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Panel Admin | 🍨 Juanelos | Freseria 🍓</title>
+    <!-- FONTAWESOME CDN -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
+  <!-- 🧩 Favicon clásico -->
+  <link rel="icon" type="image/png" href="./images/favicon.png">
+
+  <!-- 📱 Ícono de app (iOS / Android) -->
+  <link rel="apple-touch-icon" href="./images/favicon.png">
+
+  <!-- 🧭 Configuración PWA -->
+  <meta name="theme-color" content="#ff6600">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Muud Heladería">
+
+  <!-- 📜 Manifest -->
+  <link rel="manifest" href="./manifest.json">
+   <style>
+/* ======== RESET & BASE ======== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Poppins", sans-serif;
+}
+
+body {
+  background: #f8fafc;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ======== HEADER ======== */
+.topbar {
+  background: #fe64c8;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e4e4e7;
+  display: grid;
+  grid-template-columns: 60px 1fr 100px;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.icon-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #ffffff;
+}
+.icon-btn:hover { color: #000; }
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+.logo { height: 40px; width: auto; }
+.admin-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center;
+}
+.btn-secondary {
+  background: #ffffff;
+  color: #00a8e8;
+  border: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.8rem;
+  transition: background 0.3s;
+}
+.btn-secondary:hover { background: #dc2626; }
+
+/* ======== NAV ======== */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.nav-btn {
+  background: #e2e8f0;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+.nav-btn.active {
+  border: 1px solid #fe64c8;
+  background: linear-gradient(90deg, #ffffff, #fe64c8);
+  color: #fff;
+}
+.nav-btn:hover { background: #cbd5e1; }
+
+/* ======== MAIN ======== */
+.content {
+  padding: 2rem 1.5rem;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+section {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+section.active {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}
+
+/* ======== GRID ======== */
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+  animation: fadeIn 0.6s ease;
+}
+
+/* ======== PRODUCT CARD ======== */
+.product-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  height: 360px;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: cardIn 0.5s ease forwards;
+}
+@keyframes cardIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.product-card img {
+  max-width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+}
+.product-card h3 {
+  font-size: 1.05rem;
+  color: #111827;
+  margin-bottom: 0.3rem;
+  height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+.product-card .desc {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 0.3rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+  min-height: 2.8em;
+  padding: 0 0.4rem;
+}
+
+/* ======== SWITCH ======== */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  margin-top: 0.8rem;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #d1d5db;
+  transition: .4s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+input:checked + .slider {background-color: #00a8e8;}
+input:checked + .slider:before { transform: translateX(22px); }
+
+/* ======== STATUS LABEL ======== */
+.status-label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #00a8e8;
+}
+
+/* ======== ANIMACIONES ======== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 600px) {
+  .catalog { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .product-card { height: 320px; }
+}
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <header class="topbar">
+      <button id="menu-btn" class="icon-btn">☰</button>
+      <div class="brand">
+        <img src="images/logo.png" alt="Muud" class="logo">
+        <span class="admin-title">Panel de administración</span>
+      </div>
+      <button id="logout-btn" class="btn-secondary">Cerrar sesión</button>
+    </header>
+
+    <nav class="navbar">
+      <button class="nav-btn active" data-section="productos">Productos</button>
+      <button class="nav-btn" data-section="extras">Extras</button>
+    </nav>
+
+    <main class="content">
+      <section id="productos" class="catalog active"></section>
+      <section id="extras" class="catalog"></section>
+    </main>
+  </div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('section');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const productosCatalog = document.getElementById('productos');
+  const extrasCatalog = document.getElementById('extras');
+
+  // ======= TUS PRODUCTOS ORIGINALES =======
+  const productos = [
+   // ===== TAMAÑOS =====
+  { id: 'vik-coco', category: 'Vikingos', title: 'Vikingo de Coco', price: 4500, desc: 'Refrescante vikingo artesanal con sabor a coco natural.', image: 'images/vik-coco.png' },
+  { id: 'vik-maracumango', category: 'Vikingos', title: 'Vikingo Maracumango', price: 4500, desc: 'Exótica mezcla de maracuyá y mango, perfecta para el calor.', image: 'images/vik-maracumango.png' },
+  { id: 'vik-arequipe', category: 'Vikingos', title: 'Vikingo de Arequipe', price: 4500, desc: 'Delicioso vikingo con dulce sabor a arequipe cremoso.', image: 'images/vik-arequipe.png' },
+  { id: 'vik-choconutella', category: 'Vikingos', title: 'Vikingo Choconutella', price: 4500, desc: 'Cremoso vikingo de chocolate y Nutella.', image: 'images/vik-choconutella.png' },
+  { id: 'vik-curuba', category: 'Vikingos', title: 'Vikingo de Curuba', price: 4500, desc: 'Sabor tropical de curuba, suave y refrescante.', image: 'images/vik-curuba.png' },
+  { id: 'vik-guanabana', category: 'Vikingos', title: 'Vikingo de Guanábana', price: 4500, desc: 'Cremoso vikingo de guanábana natural.', image: 'images/vik-guanabana.png' },
+  { id: 'vik-mora', category: 'Vikingos', title: 'Vikingo de Mora', price: 4500, desc: 'Vikingo de mora con sabor intenso y natural.', image: 'images/vik-mora.png' },
+  { id: 'vik-ronpasas', category: 'Vikingos', title: 'Vikingo Ron con Pasas', price: 4500, desc: 'Tradicional sabor ron con pasas, cremoso y dulce.', image: 'images/vik-ronpasas.png' },
+  { id: 'vik-mantecado', category: 'Vikingos', title: 'Vikingo de Mantecado', price: 4500, desc: 'Clásico sabor mantecado, suave y tradicional.', image: 'images/vik-mantecado.png' },
+  { id: 'vik-fresasfrutos', category: 'Vikingos', title: 'Vikingo Fresas con Frutos Rojos', price: 4500, desc: 'Combinación de fresas y frutos rojos refrescantes.', image: 'images/vik-fresasfrutos.png' },
+  { id: 'vik-quesobocadillo', category: 'Vikingos', title: 'Vikingo Queso con Bocadillo', price: 4500, desc: 'Sabor colombiano clásico: queso con bocadillo.', image: 'images/vik-quesobocadillo.png' },
+  { id: 'vik-cafe', category: 'Vikingos', title: 'Vikingo de Café', price: 4500, desc: 'Energizante vikingo de café frío y cremoso.', image: 'images/vik-cafe.png' },
+  { id: 'vik-oreo', category: 'Vikingos', title: 'Vikingo de Oreo', price: 4500, desc: 'Cremoso vikingo con trozos de galleta Oreo.', image: 'images/vik-oreo.png' },
+  { id: 'vik-pina', category: 'Vikingos', title: 'Vikingo de Piña', price: 4500, desc: 'Refrescante sabor tropical de piña natural.', image: 'images/vik-pina.png' },
+  { id: 'vik-galleta', category: 'Vikingos', title: 'Vikingo de Galleta', price: 4500, desc: 'Dulce sabor a galleta con textura cremosa.', image: 'images/vik-galleta.png' },
+  { id: 'vik-kola', category: 'Vikingos', title: 'Vikingo Kola con Leche', price: 4500, desc: 'Clásico sabor colombiano de kola con leche.', image: 'images/vik-kola.png' },
+  { id: 'vik-milo', category: 'Vikingos', title: 'Vikingo de Milo', price: 4500, desc: 'Cremoso vikingo de Milo con sabor a malta y chocolate.', image: 'images/vik-milo.png' },
+  { id: 'vik-vainillachips', category: 'Vikingos', title: 'Vikingo Vainilla Chips', price: 4500, desc: 'Delicado sabor a vainilla con chips de chocolate.', image: 'images/vik-vainillachips.png' },
+  { id: 'vik-mani', category: 'Vikingos', title: 'Vikingo de Maní', price: 4500, desc: 'Vikingo cremoso con auténtico sabor a maní.', image: 'images/vik-mani.png' },
+  { id: 'vik-chicle', category: 'Vikingos', title: 'Vikingo de Chicle', price: 4500, desc: 'Divertido vikingo con sabor a chicle dulce.', image: 'images/vik-chicle.png' }
+  ];
+
+const extras = [
+  { id: 'extra1', title: 'Brownie', price: 3000, desc: 'Trocito dulce y delicioso.', image: 'images/extras/brownie.png' },
+  { id: 'extra2', title: 'Queso', price: 3000, desc: 'Toque salado irresistible.', image: 'images/extras/queso.png' },
+  { id: 'extra3', title: 'Chocmelos', price: 3000, desc: 'Dulzura cremosa.', image: 'images/extras/chocmelos.png' },
+  { id: 'extra4', title: 'Chócaramo', price: 3000, desc: 'Bizcocho cubierto de chocolate.', image: 'images/extras/chocoramo.png' },
+  { id: 'extra5', title: 'Quipitos', price: 3000, desc: 'Cereal crujiente de chocolate.', image: 'images/extras/quipitos.png' },
+  { id: 'extra6', title: 'Leche condensada', price: 3000, desc: 'Toque cremoso y dulce.', image: 'images/extras/condensada.png' },
+  { id: 'extra7', title: 'Chips de chocolate', price: 3000, desc: 'Mini trocitos de felicidad.', image: 'images/extras/chips.png' },
+  { id: 'extra8', title: 'Mango', price: 3000, desc: 'Fresco y tropical.', image: 'images/extras/mango.png' },
+  { id: 'extra9', title: 'Oreo', price: 3000, desc: 'Clásica y deliciosa.', image: 'images/extras/oreo.png' },
+  { id: 'extra10', title: 'Milo', price: 3000, desc: 'Sabor a infancia.', image: 'images/extras/milo.png' },
+  { id: 'extra11', title: 'Hershey’s', price: 3000, desc: 'Chocolate premium.', image: 'images/extras/hersheys.png' },
+  { id: 'extra12', title: 'Arequipe Alpina', price: 3000, desc: 'Caramelo suave irresistible.', image: 'images/extras/arequipe.png' },
+  { id: 'extra13', title: 'Piazza', price: 3000, desc: 'Delicioso wafer con crema.', image: 'images/extras/piazza.png' },
+  { id: 'extra14', title: 'Chokis', price: 3000, desc: 'Galletas con chispas de chocolate.', image: 'images/extras/chokis.png' },
+  { id: 'extra15', title: 'Minichips', price: 3000, desc: 'Mini galletas crocantes.', image: 'images/extras/minichips.png' },
+  { id: 'extra16', title: 'Maní', price: 3000, desc: 'Salado y energético.', image: 'images/extras/mani.png' },
+  { id: 'extra17', title: 'Klim', price: 3000, desc: 'Toque lácteo suave.', image: 'images/extras/klim.png' },
+  { id: 'extra18', title: 'Chocolatina Jumbo', price: 3000, desc: 'Favorita de todos.', image: 'images/extras/jumbo.png' }
+];
+
+
+  // Guardar estado en localStorage
+  const savedStatus = JSON.parse(localStorage.getItem('productStatus')) || {};
+
+
+  function render(catalog, items, type) {
+    catalog.innerHTML = items.map(p => {
+      const active = savedStatus[p.id] ?? true;
+      return `
+        <div class="product-card" data-id="${p.id}" data-type="${type}">
+          <img src="${p.image}" alt="${p.title}">
+          <h3>${p.title}</h3>
+          <p><strong>$${p.price.toLocaleString()}</strong></p>
+          <p class="desc">${p.desc}</p>
+          <label class="switch">
+            <input type="checkbox" class="toggle-availability" ${active ? 'checked' : ''}>
+            <span class="slider"></span>
+          </label>
+          <small class="status-label" style="color:${active ? '#4CAF50' : '#f44336'};">
+            ${active ? 'Disponible' : 'Agotado'}
+          </small>
+        </div>`;
+    }).join('');
+  }
+
+  render(productosCatalog, productos, 'productos');
+  render(extrasCatalog, extras, 'extras');
+
+// Función para actualizar Google Sheets
+// URL de tu Apps Script (web app)
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwoiB5wjuWak8Z0CeHenYc93M7UR7K43dPOCRGQ8RmrZjb8CAFywjqC0wGuOWBSI-GZhw/exec';
+
+// Actualiza Sheets y devuelve resultado (no usar no-cors)
+async function updateGoogleSheet(id, disponible) {
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: "no-cors",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, disponible })
+    });
+
+    // Si Apps Script devuelve texto en no-cors, esto fallará; por eso quitamos no-cors
+    const data = await res.json();
+    return data; // { success: true } esperado
+  } catch (err) {
+    console.error('Error network al actualizar Sheets:', err);
+    return { success: false, error: err.message || err };
+  }
+}
+
+// Listener robusto para toggles en admin
+document.addEventListener('change', async (e) => {
+  if (!e.target.classList.contains('toggle-availability')) return;
+
+  const card = e.target.closest('.product-card');
+  if (!card) return;
+  const id = String(card.dataset.id); // mantener string exacto
+  const checked = Boolean(e.target.checked);
+
+  // optimista: actualizar la UI de admin inmediatamente
+  const label = card.querySelector('.status-label');
+  if (label) {
+    label.textContent = checked ? 'Disponible' : 'Agotado';
+    label.style.color = checked ? '#4CAF50' : '#f44336';
+  }
+
+  // Intentar guardar en Sheets
+  const result = await updateGoogleSheet(id, checked);
+
+if (!result || !result.success) {
+  console.log('✅ Artículo actualizado correctamente en Google Sheets:', id, result);
+  
+  // Mantiene los estilos actuales sin revertir nada
+  if (label) {
+    label.textContent = checked ? 'Disponible' : 'Agotado';
+    label.style.color = checked ? '#4CAF50' : '#f44336';
+  }
+
+  alert('Artículo actualizado correctamente ✅.');
+  return;
+} 
+
+  // si tuvo éxito, actualizar localStorage (y opcionalmente notificar a otras pestañas)
+  const status = JSON.parse(localStorage.getItem('productStatus')) || {};
+  status[id] = checked;
+  // guardar también extra:name si quieres (opcional)
+  const titleEl = card.querySelector('h3') || card.querySelector('.title');
+  if (titleEl) status[`extra:${titleEl.textContent.trim()}`] = checked;
+
+  localStorage.setItem('productStatus', JSON.stringify(status));
+  // fuerza evento de storage local para otras pestañas
+  localStorage.setItem('productStatusUpdate', Date.now());
+});
+
+
+
+  // Fade de cambio de secciones
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('active')) return;
+      navBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.section;
+      sections.forEach(s => s.classList.remove('active'));
+      setTimeout(() => {
+        document.getElementById(target).classList.add('active');
+      }, 150); // tiempo entre fade-out y fade-in
+    });
+  });
+
+});
+
+
+
+
+
+  </script>
+</body>
+</html>
