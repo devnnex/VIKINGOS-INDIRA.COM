@@ -103,12 +103,12 @@
 
       <div class="cart-summary">
         <div class="row">
-          <span>Subtotal</span>
-          <strong id="cart-subtotal">$0</strong>
+          <span></span>
+          <strong id="cart-subtotal"></strong>
         </div>
 
         <div class="row total">
-          <span>Total</span>
+          <span>TOTAL</span>
           <strong id="cart-total">$0</strong>
         </div>
 
@@ -176,10 +176,31 @@
                 <button type="button" id="copy-account" class="copy-btn">Copiar</button>
               </p>
               <p><strong>Titular:</strong> Elk Ran</p>
+
+                 <!-- 🔹 QR de pago (Nequi + Bancolombia) -->
+  <div class="qr-box">
+
+  <div class="qr-item">
+    <img src="images/qr-nequi.png" alt="QR Nequi" class="qr-img">
+    <p>
+      Nequi
+      <i class="fa-solid fa-download qr-download" data-img="images/qr-nequi.png"></i>
+    </p>
+  </div>
+
+  <div class="qr-item">
+    <img src="images/qr-bancolombia.png" alt="QR Bancolombia" class="qr-img">
+    <p>
+      Bancolombia
+      <i class="fa-solid fa-download qr-download" data-img="images/qr-bancolombia.png"></i>
+    </p>
+  </div>
+
+</div>
             </div>
 
             <label>Notas (opcional)
-              <textarea name="notes" rows="2" placeholder="Ej: Sin cebolla"></textarea>
+              <textarea name="notes" rows="2" placeholder="Ej: Deja tus notas aqui"></textarea>
             </label>
 
             <div id="envio-row" class="checkout-row hidden">
@@ -249,16 +270,30 @@
     <div class="footer-content">
       <img src="images/logo.png" alt="The Boss Logo" class="footer-logo">
 
-      <!-- <ul class="footer-social">
-        <li><a href="https://wa.me/573117650829" target="_blank"><i class="bx bxl-whatsapp"></i></a></li>
-        <li><a href="https://www.instagram.com/muud.col/" target="_blank"><i class="bx bxl-instagram"></i></a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61573196803550&ref=pl_edit_ig_profile_ac" target="_blank"><i class="bx bxl-facebook"></i></a></li>
-        <li><a href="#" target="_blank"><i class="bx bxl-tiktok"></i></a></li>
-      </ul> -->
-
+  
       <p>© 2025  🍨 Vikingos | Indira 🍓. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+Swal.fire({
+  icon: 'success',
+  title: '¡Éxito!',
+  html: `
+      Agrega tus Vikingos o Agua, confirmaremos tu orden tan pronto recibamos tu comprobante.<br><br>
+      <b>⚠️ El costo del domicilio dependerá de la mensajería.</b>
+  `,
+  background: '#ffffff',        // Fondo blanco
+  color: '#000000',             // Texto negro
+  iconColor: '#e91e63',         // Icono rosado
+  showCancelButton: true,
+  confirmButtonText: 'Aceptar',
+  cancelButtonText: 'Cancelar',
+  confirmButtonColor: '#e91e63',  // Rosado
+  cancelButtonColor: '#2e7d32',   // Verde
+});
+</script>
 
   <script src="app.js"></script>
 </body>
