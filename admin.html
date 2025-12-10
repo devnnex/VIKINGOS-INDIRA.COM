@@ -82,7 +82,7 @@ body {
   text-align: center;
 }
 .btn-secondary {
-  background: #ffffff;
+  background: #fe64c8;
   color: #00a8e8;
   border: none;
   padding: 0.35rem 0.6rem;
@@ -92,7 +92,7 @@ body {
   font-size: 0.8rem;
   transition: background 0.3s;
 }
-.btn-secondary:hover { background: #dc2626; }
+.btn-secondary:hover {background: #fe64c8;}
 
 /* ======== NAV ======== */
 .navbar {
@@ -261,24 +261,77 @@ input:checked + .slider:before { transform: translateX(22px); }
   .catalog { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
   .product-card { height: 320px; }
 }
+
+
+/* ===== BUSCADOR ===== */
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+#search-input {
+  width: 80%;
+  max-width: 500px;
+  padding: 0.7rem 1rem;
+  padding-left: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid #d4d4d8;
+  outline: none;
+  font-size: 1rem;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+#search-input:focus {
+  border-color: #fe64c8;
+  box-shadow: 0 0 8px rgba(254, 100, 200, 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  left: calc(50% - 240px);
+  transform: translateY(12px);
+  color: #777;
+  font-size: 1rem;
+}
+
+
+
+@media (max-width: 600px) {
+  .search-icon {
+    left: calc(50% - 160px);
+  }
+}
+
+
   </style>
 </head>
 
 <body>
   <div id="app">
     <header class="topbar">
-      <button id="menu-btn" class="icon-btn">☰</button>
+      <button id="menu-btn" class="icon-btn">🍨</button>
       <div class="brand">
         <img src="images/logo.png" alt="Muud" class="logo">
         <span class="admin-title">Panel de administración</span>
       </div>
-      <button id="logout-btn" class="btn-secondary">Cerrar sesión</button>
+      <button id="logout-btn" class="btn-secondary">🍓</button>
     </header>
 
     <nav class="navbar">
       <button class="nav-btn active" data-section="productos">Productos</button>
-      <button class="nav-btn" data-section="extras">Extras</button>
+      <!-- <button class="nav-btn" data-section="extras">Extras</button> -->
     </nav>
+
+  <div class="search-container">
+    <input id="search-input" type="text" placeholder="Buscar productos..." />
+    <i class="fa fa-search search-icon"></i>
+  </div>
+
 
     <main class="content">
       <section id="productos" class="catalog active"></section>
@@ -315,7 +368,9 @@ document.addEventListener('DOMContentLoaded', () => {
   { id: 'vik-milo', category: 'Vikingos', title: 'Vikingo de Milo', price: 4500, desc: 'Cremoso vikingo de Milo con sabor a malta y chocolate.', image: 'images/vik-milo.png' },
   { id: 'vik-vainillachips', category: 'Vikingos', title: 'Vikingo Vainilla Chips', price: 4500, desc: 'Delicado sabor a vainilla con chips de chocolate.', image: 'images/vik-vainillachips.png' },
   { id: 'vik-mani', category: 'Vikingos', title: 'Vikingo de Maní', price: 4500, desc: 'Vikingo cremoso con auténtico sabor a maní.', image: 'images/vik-mani.png' },
-  { id: 'vik-chicle', category: 'Vikingos', title: 'Vikingo de Chicle', price: 4500, desc: 'Divertido vikingo con sabor a chicle dulce.', image: 'images/vik-chicle.png' }
+  { id: 'vik-chicle', category: 'Vikingos', title: 'Vikingo de Chicle', price: 4500, desc: 'Divertido vikingo con sabor a chicle dulce.', image: 'images/vik-chicle.png' },
+  //AGUAS
+  { id: 'Agua1', category: 'Aguas', title: 'Bolsa de agua', price: 500, desc: 'Bolsa de agua pura y refrescante.', image: 'images/aguaBolsa.png' }
   ];
 
 const extras = [
@@ -459,4 +514,3 @@ if (!result || !result.success) {
   </script>
 </body>
 </html>
-
