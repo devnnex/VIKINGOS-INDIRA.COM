@@ -2,7 +2,7 @@
 
 // ---------- Config ----------
 const BUSINESS_PHONE = '573116468485'; // <- reemplaza por el número real (sin '+')
-const DELIVERY_FEE = 5000; // tarifa por defecto de domicilio
+const DELIVERY_FEE = 0; // tarifa por defecto de domicilio
 
 // ---------- Datos de ejemplo ----------
 const products = [
@@ -26,7 +26,9 @@ const products = [
   { id: 'vik-milo', category: 'Vikingos', title: 'Vikingo de Milo', price: 4500, desc: 'Cremoso vikingo de Milo con sabor a malta y chocolate.', image: 'images/vik-milo.png' },
   { id: 'vik-vainillachips', category: 'Vikingos', title: 'Vikingo Vainilla Chips', price: 4500, desc: 'Delicado sabor a vainilla con chips de chocolate.', image: 'images/vik-vainillachips.png' },
   { id: 'vik-mani', category: 'Vikingos', title: 'Vikingo de Maní', price: 4500, desc: 'Vikingo cremoso con auténtico sabor a maní.', image: 'images/vik-mani.png' },
-  { id: 'vik-chicle', category: 'Vikingos', title: 'Vikingo de Chicle', price: 4500, desc: 'Divertido vikingo con sabor a chicle dulce.', image: 'images/vik-chicle.png' }
+  { id: 'vik-chicle', category: 'Vikingos', title: 'Vikingo de Chicle', price: 4500, desc: 'Divertido vikingo con sabor a chicle dulce.', image: 'images/vik-chicle.png' },
+  //AGUAS
+  { id: 'Agua1', category: 'Aguas', title: 'Bolsa de agua', price: 500, desc: 'Bolsa de agua pura y refrescante.', image: 'images/aguaBolsa.png' }
 ];
 
 const categories = [...new Set(products.map(p=>p.category))];
@@ -529,8 +531,8 @@ function refreshCartUI() {
   cartItemsEl.innerHTML = '';
   if (cart.length === 0) {
     cartItemsEl.innerHTML = '<div class="empty">Tu carrito está vacío 🍦</div>';
-    cartSubtotalEl.textContent = '$0';
-    cartDeliveryEl.textContent = '$0';
+    // cartSubtotalEl.textContent = '$0';
+    // cartDeliveryEl.textContent = '$0';
     cartTotalEl.textContent = '$0';
     updateCartBadge();
     return;
@@ -586,13 +588,36 @@ function refreshCartUI() {
     });
 
     // --- ELIMINAR PRODUCTO ---
-    div.querySelector('.remove-btn').addEventListener('click', () => {
-      if (confirm(`¿Eliminar "${item.title}" del carrito?`)) {
-        cart.splice(idx, 1);
-        persistCart();
-        refreshCartUI();
-      }
+   div.querySelector('.remove-btn').addEventListener('click', () => {
+
+    Swal.fire({
+        title: `¿Eliminar "${item.title}" del carrito?`,
+        icon: "warning",
+        background: "#ffffff",
+        color: "#000000",
+        showCancelButton: true,
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+
+        // 🎨 COLORES DE LOS BOTONES
+        confirmButtonColor: "#e91e63", // rosado
+        cancelButtonColor: "#4caf50",  // verde
+
+        // Forzar texto blanco
+        customClass: {
+            confirmButton: "swal-confirm-white-text",
+            cancelButton: "swal-cancel-white-text"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            cart.splice(idx, 1);
+            persistCart();
+            refreshCartUI();
+        }
     });
+
+});
+
 
     // --- EDITAR PRODUCTO DESDE EL CARRITO ---
     div.addEventListener('click', (e) => {
@@ -605,7 +630,7 @@ function refreshCartUI() {
     cartItemsEl.appendChild(div);
   });
 
-  cartSubtotalEl.textContent = `$${numberWithCommas(subtotal)}`;
+  // cartSubtotalEl.textContent = `$${numberWithCommas(subtotal)}`;
   cartDeliveryEl.textContent = `$${numberWithCommas(DELIVERY_FEE)}`;
   cartTotalEl.textContent = `$${numberWithCommas(subtotal)}`;
   updateCartBadge();
@@ -633,10 +658,20 @@ clearCartBtn.addEventListener('click', ()=>{ if(confirm('Vaciar carrito?')){ car
 
 // ---------- Checkout ----------
 function openCheckout() {
-  if (cart.length === 0) { 
-    alert('El carrito está vacío.'); 
-    return; 
-  }
+ if (cart.length === 0) {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Carrito vacío',
+        text: 'Debes agregar productos antes de continuar.',
+        background: '#ffffff',       // Fondo blanco
+        color: '#000000',            // Texto negro
+        iconColor: '#e91e63',        // Icono rosado
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#e91e63' // Botón rosado
+    });
+    return;
+}
+
 
   // 🔹 Recalcular subtotal actual (incluyendo extras)
 const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -670,7 +705,7 @@ const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
       const deliveryEl = document.getElementById('cart-delivery');
       const totalCheckoutEl = document.getElementById('cart-total-checkout');
 
-      const DELIVERY_FEE = 5000;
+      const DELIVERY_FEE = 0;
       const delivery = (method === 'domicilio' && subtotal > 0) ? DELIVERY_FEE : 0;
       const totalUpdated = subtotal + delivery;
 
@@ -704,7 +739,7 @@ function updateCheckoutTotals() {
   const deliveryEl = document.getElementById('cart-delivery-checkout');
   const totalEl = document.getElementById('cart-total-checkout');
 
-  const DELIVERY_FEE = 5000; // mismo valor usado en refreshCartUI
+  const DELIVERY_FEE = 0; // mismo valor usado en refreshCartUI
 
   // Mostrar u ocultar campo de dirección
   addressLabel.classList.toggle('hidden', method !== 'domicilio');
@@ -882,7 +917,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addressLabel = document.getElementById("address-label");
   const envioRow = document.getElementById("envio-row");
   const cartDelivery = document.getElementById("cart-delivery");
-  const DELIVERY_FEE = 5000;
+  const DELIVERY_FEE = 0;
   const accountNumber = document.getElementById("account-number");
   const copyBtn = document.getElementById("copy-account");
 
@@ -1056,26 +1091,61 @@ checkoutOverlay.addEventListener("click", (e) => {
 
 
 
+// ============Descargar QR=================
+document.addEventListener("click", (e) => {
+  // Usa closest para soportar clicks sobre el SVG interno de FontAwesome
+  const btn = e.target.closest && e.target.closest(".qr-download");
+  if (!btn) return;
 
-
-
-// === Carrusel de promociones ===
-const track = document.querySelector('.banner-track');
-const slides = document.querySelectorAll('.banner-slide');
-const nextBtn = document.querySelector('.banner-btn.next');
-const prevBtn = document.querySelector('.banner-btn.prev');
-
-if (track && slides.length > 1) {
-  let index = 0;
-
-  function showSlide(i) {
-    index = (i + slides.length) % slides.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
+  const imgPath = btn.dataset.img;
+  if (!imgPath) {
+    console.warn("qr-download sin data-img");
+    return;
   }
 
-  nextBtn.addEventListener('click', () => showSlide(index + 1));
-  prevBtn.addEventListener('click', () => showSlide(index - 1));
+  // helper para descargar
+  const downloadImage = (url) => {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = url.split("/").pop();
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
 
-  // Auto-slide cada 5s
-  setInterval(() => showSlide(index + 1), 5000);
-}
+  // Si SweetAlert2 no está disponible, fallback a confirm nativo
+  if (typeof Swal === "undefined") {
+    console.warn("SweetAlert2 (Swal) no disponible. Usando confirm nativo.");
+    const ok = confirm(
+      "Puedes pagar escaneando nuestros códigos QR de Nequi o Bancolombia.\n\nTambién puedes descargar los QR. ¿Descargar ahora?"
+    );
+    if (ok) downloadImage(imgPath);
+    return;
+  }
+
+  // SweetAlert2 disponible -> mostrar alerta antes de descargar
+  Swal.fire({
+    icon: "info",
+    title: "Pago con QR",
+    html: `
+      Puedes pagar escaneando nuestros códigos QR de <strong>Nequi</strong> o <strong>Bancolombia</strong>.<br><br>
+      También puedes <strong>descargar los QR</strong> dando clic en el icono de descarga.
+    `,
+    showCancelButton: true,
+    confirmButtonText: "Descargar",
+    cancelButtonText: "Cancelar",
+    background: "#ffffff",       // fondo blanco
+    color: "#000000",            // texto negro
+    confirmButtonColor: "#e91e63", // botón rosado
+    cancelButtonColor: "#2ecc71",  // botón verde
+    iconColor: "#e91e63"         // icono rosado
+}).then(result => {
+    if (result.isConfirmed) downloadImage(imgPath);
+});
+});
+
+
+
+// ============Fin de codigo de Descarga QR=================
+
+
