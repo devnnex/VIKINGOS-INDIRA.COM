@@ -27,6 +27,9 @@ const products = [
   { id: 'vik-vainillachips', category: 'Vikingos', title: 'Vikingo Vainilla Chips', price: 4500, desc: 'Delicado sabor a vainilla con chips de chocolate.', image: 'images/vik-vainillachips.png' },
   { id: 'vik-mani', category: 'Vikingos', title: 'Vikingo de Maní', price: 4500, desc: 'Vikingo cremoso con auténtico sabor a maní.', image: 'images/vik-mani.png' },
   { id: 'vik-chicle', category: 'Vikingos', title: 'Vikingo de Chicle', price: 4500, desc: 'Divertido vikingo con sabor a chicle dulce.', image: 'images/vik-chicle.png' },
+  { id: 'vik-lulo', category: 'Vikingos', title: 'Vikingo de Lulo', price: 4500, desc: 'Delicioso vikingo de Lulo Natural.', image: 'images/vik-lulo.png' },
+  { id: 'vik-salpicon', category: 'Vikingos', title: 'Vikingo de Salpicón', price: 4500, desc: 'Delicioso vikingo de Salpicón Natural.', image: 'images/vik-salpicon.png' },
+  { id: 'vik-nucita', category: 'Vikingos', title: 'Vikingo de Nucita', price: 4500, desc: 'Delicioso vikingo de Nucita.', image: 'images/vik-nucita.png' },
   //AGUAS
   { id: 'Agua1', category: 'Aguas', title: 'Bolsa de agua', price: 500, desc: 'Bolsa de agua pura y refrescante.', image: 'images/aguaBolsa.png' }
 ];
