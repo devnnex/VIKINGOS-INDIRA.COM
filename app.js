@@ -533,7 +533,7 @@ function updateCartBadge() {
 function refreshCartUI() {
   cartItemsEl.innerHTML = '';
   if (cart.length === 0) {
-    cartItemsEl.innerHTML = '<div class="empty">Tu carrito está vacío 🍦</div>';
+    cartItemsEl.innerHTML = '<div class="empty">Tu carrito está vacío </div>';
     // cartSubtotalEl.textContent = '$0';
     // cartDeliveryEl.textContent = '$0';
     cartTotalEl.textContent = '$0';
