@@ -1562,3 +1562,26 @@ body {
 .swal-cancel-white-text {
     color: white !important;
 }
+
+/*CSS del Toast*/
+
+.cart-hint-toast {
+  position: absolute;
+  background: #2ecc71;
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.cart-hint-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
