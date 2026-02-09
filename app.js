@@ -795,7 +795,7 @@ checkoutForm.addEventListener('submit', (e) => {
   let textParts = [];
 
   // Cabecera
-  textParts.push('🧾 *Nuevo Pedido - Vikingos Indira✅*');
+  textParts.push('🧾 *Nuevo Pedido - Vikingos Indira Barrancabermeja✅*');
   textParts.push(`👤 Cliente: ${clientName}`);
   textParts.push(`📞 Teléfono: ${clientPhone}`);
   textParts.push(`🚚 Tipo: ${method}`);
@@ -1187,5 +1187,6 @@ function showCartHintToast() {
 
 
 // ============Fin de codigo de Descarga QR=================
+
 
 
