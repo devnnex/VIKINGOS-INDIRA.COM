@@ -780,8 +780,9 @@ checkoutForm.addEventListener('change', updateCheckoutTotals);
 
 
 
-// Envío por WhatsApp
 checkoutForm.addEventListener('submit', (e) => {
+  
+  const submitBtn = checkoutForm.querySelector('button[type="submit"]');
   e.preventDefault();
 
   const fd = new FormData(checkoutForm);
@@ -791,6 +792,28 @@ checkoutForm.addEventListener('submit', (e) => {
   const payment = fd.get('payment') || '';
   const address = fd.get('address')?.trim() || '';
   const notes = fd.get('notes')?.trim() || '';
+
+
+  // 🔎 Validación de barrio obligatorio en domicilio
+if (method === 'domicilio') {
+  const addressLower = address.toLowerCase();
+  const hasBarrio = 
+    addressLower.includes('barrio') ||
+    addressLower.includes('barr.') ||
+    addressLower.includes('br.');
+
+  if (!hasBarrio) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Debes indicar el barrio',
+      text: 'Por favor agrega el barrio en la dirección.',
+      confirmButtonColor: '#e91e63'
+    });
+    return;
+  }
+}
+
+
 
   let textParts = [];
 
@@ -848,7 +871,50 @@ checkoutForm.addEventListener('submit', (e) => {
   const msg = encodeURIComponent(textParts.join('\n'));
   const waUrl = `https://wa.me/${bp}?text=${msg}`;
 
+
+// 🔒 Bloquear botón para evitar doble envío
+submitBtn.disabled = true;
+submitBtn.textContent = 'Enviando pedido...';
+
+// Mostrar aviso antes de enviar
+Swal.fire({
+  icon: 'success',
+  title: 'Envía tu comprobante',
+  text: 'Recuerda enviar el comprobante de pago a nuestro WhatsApp para confirmar tu pedido. Si es en efectivo haz caso omiso a este mensaje.',
+  showConfirmButton: false,
+  timer: 2000,
+  background: '#ffffff',
+  color: '#000000',
+  iconColor: '#e91e63'
+}).then(() => {
+
+  // 📲 Abrir WhatsApp
   window.open(waUrl, '_blank');
+
+  // 🧹 Vaciar carrito
+  cart = [];
+  persistCart();
+  refreshCartUI();
+
+  
+  localStorage.removeItem('tb_cart');
+
+  // Cerrar modal checkout
+  checkoutModal.classList.add('hidden');
+
+  // ✅ Mensaje final
+  Swal.fire({
+    icon: 'success',
+    title: 'Pedido enviado correctamente',
+    text: 'Tu pedido fue enviado por WhatsApp. Te responderemos pronto.',
+    confirmButtonColor: '#e91e63'
+  });
+
+  // 🔓 Reactivar botón por seguridad
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Confirmar pedido';
+});
+
 });
 
 
@@ -1187,6 +1253,7 @@ function showCartHintToast() {
 
 
 // ============Fin de codigo de Descarga QR=================
+
 
 
 
