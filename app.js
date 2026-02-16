@@ -13,6 +13,7 @@ const products = [
   { id: 'vik-choconutella', category: 'Vikingos', title: 'Vikingo Choconutella', price: 4500, desc: 'Cremoso vikingo de chocolate y Nutella.', image: 'images/vik-choconutella.png' },
   { id: 'vik-curuba', category: 'Vikingos', title: 'Vikingo de Curuba', price: 4500, desc: 'Sabor tropical de curuba, suave y refrescante.', image: 'images/vik-curuba.png' },
   { id: 'vik-guanabana', category: 'Vikingos', title: 'Vikingo de Guanábana', price: 4500, desc: 'Cremoso vikingo de guanábana natural.', image: 'images/vik-guanabana.png' },
+  { id: 'vik-mangobiche', category: 'Vikingos', title: 'Vikingo de Mangobiche', price: 4500, desc: 'Refrescante combinación de mango biche 100% natural', image: 'images/vik-mangobiche.png' },
   { id: 'vik-mora', category: 'Vikingos', title: 'Vikingo de Mora', price: 4500, desc: 'Vikingo de mora con sabor intenso y natural.', image: 'images/vik-mora.png' },
   { id: 'vik-ronpasas', category: 'Vikingos', title: 'Vikingo Ron con Pasas', price: 4500, desc: 'Tradicional sabor ron con pasas, cremoso y dulce.', image: 'images/vik-ronpasas.png' },
   { id: 'vik-mantecado', category: 'Vikingos', title: 'Vikingo de Mantecado', price: 4500, desc: 'Clásico sabor mantecado, suave y tradicional.', image: 'images/vik-mantecado.png' },
@@ -1220,6 +1221,7 @@ function showCartHintToast() {
 
 
 // ============Fin de codigo de Descarga QR=================
+
 
 
 
