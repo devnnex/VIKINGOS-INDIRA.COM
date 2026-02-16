@@ -7,32 +7,34 @@ const DELIVERY_FEE = 0; // tarifa por defecto de domicilio
 // ---------- Datos de ejemplo ----------
 const products = [
   // ===== TAMAÑOS =====
-  { id: 'vik-coco', category: 'Vikingos', title: 'Vikingo de Coco', price: 4500, desc: 'Refrescante vikingo artesanal con sabor a coco natural.', image: 'images/vik-coco.png' },
-  { id: 'vik-maracumango', category: 'Vikingos', title: 'Vikingo Maracumango', price: 4500, desc: 'Exótica mezcla de maracuyá y mango, perfecta para el calor.', image: 'images/vik-maracumango.png' },
-  { id: 'vik-arequipe', category: 'Vikingos', title: 'Vikingo de Arequipe', price: 4500, desc: 'Delicioso vikingo con dulce sabor a arequipe cremoso.', image: 'images/vik-arequipe.png' },
-  { id: 'vik-choconutella', category: 'Vikingos', title: 'Vikingo Choconutella', price: 4500, desc: 'Cremoso vikingo de chocolate y Nutella.', image: 'images/vik-choconutella.png' },
-  { id: 'vik-curuba', category: 'Vikingos', title: 'Vikingo de Curuba', price: 4500, desc: 'Sabor tropical de curuba, suave y refrescante.', image: 'images/vik-curuba.png' },
-  { id: 'vik-guanabana', category: 'Vikingos', title: 'Vikingo de Guanábana', price: 4500, desc: 'Cremoso vikingo de guanábana natural.', image: 'images/vik-guanabana.png' },
-  { id: 'vik-mangobiche', category: 'Vikingos', title: 'Vikingo de Mangobiche', price: 4500, desc: 'Refrescante combinación de mango biche 100% natural', image: 'images/vik-mangobiche.png' },
-  { id: 'vik-mora', category: 'Vikingos', title: 'Vikingo de Mora', price: 4500, desc: 'Vikingo de mora con sabor intenso y natural.', image: 'images/vik-mora.png' },
-  { id: 'vik-ronpasas', category: 'Vikingos', title: 'Vikingo Ron con Pasas', price: 4500, desc: 'Tradicional sabor ron con pasas, cremoso y dulce.', image: 'images/vik-ronpasas.png' },
-  { id: 'vik-mantecado', category: 'Vikingos', title: 'Vikingo de Mantecado', price: 4500, desc: 'Clásico sabor mantecado, suave y tradicional.', image: 'images/vik-mantecado.png' },
-  { id: 'vik-fresasfrutos', category: 'Vikingos', title: 'Vikingo Fresas con Frutos Rojos', price: 4500, desc: 'Combinación de fresas y frutos rojos refrescantes.', image: 'images/vik-fresasfrutos.png' },
-  { id: 'vik-quesobocadillo', category: 'Vikingos', title: 'Vikingo Queso con Bocadillo', price: 4500, desc: 'Sabor colombiano clásico: queso con bocadillo.', image: 'images/vik-quesobocadillo.png' },
-  { id: 'vik-cafe', category: 'Vikingos', title: 'Vikingo de Café', price: 4500, desc: 'Energizante vikingo de café frío y cremoso.', image: 'images/vik-cafe.png' },
-  { id: 'vik-oreo', category: 'Vikingos', title: 'Vikingo de Oreo', price: 4500, desc: 'Cremoso vikingo con trozos de galleta Oreo.', image: 'images/vik-oreo.png' },
-  { id: 'vik-pina', category: 'Vikingos', title: 'Vikingo de Piña', price: 4500, desc: 'Refrescante sabor tropical de piña natural.', image: 'images/vik-pina.png' },
-  { id: 'vik-galleta', category: 'Vikingos', title: 'Vikingo de Galleta', price: 4500, desc: 'Dulce sabor a galleta con textura cremosa.', image: 'images/vik-galleta.png' },
-  { id: 'vik-kola', category: 'Vikingos', title: 'Vikingo Kola con Leche', price: 4500, desc: 'Clásico sabor colombiano de kola con leche.', image: 'images/vik-kola.png' },
-  { id: 'vik-milo', category: 'Vikingos', title: 'Vikingo de Milo', price: 4500, desc: 'Cremoso vikingo de Milo con sabor a malta y chocolate.', image: 'images/vik-milo.png' },
-  { id: 'vik-vainillachips', category: 'Vikingos', title: 'Vikingo Vainilla Chips', price: 4500, desc: 'Delicado sabor a vainilla con chips de chocolate.', image: 'images/vik-vainillachips.png' },
-  { id: 'vik-mani', category: 'Vikingos', title: 'Vikingo de Maní', price: 4500, desc: 'Vikingo cremoso con auténtico sabor a maní.', image: 'images/vik-mani.png' },
-  { id: 'vik-chicle', category: 'Vikingos', title: 'Vikingo de Chicle', price: 4500, desc: 'Divertido vikingo con sabor a chicle dulce.', image: 'images/vik-chicle.png' },
-  { id: 'vik-lulo', category: 'Vikingos', title: 'Vikingo de Lulo', price: 4500, desc: 'Delicioso vikingo de Lulo Natural.', image: 'images/vik-lulo.png' },
-  { id: 'vik-salpicon', category: 'Vikingos', title: 'Vikingo de Salpicón', price: 4500, desc: 'Delicioso vikingo de Salpicón Natural.', image: 'images/vik-salpicon.png' },
-  { id: 'vik-nucita', category: 'Vikingos', title: 'Vikingo de Nucita', price: 4500, desc: 'Delicioso vikingo de Nucita.', image: 'images/vik-nucita.png' },
+  { id: 'vik-coco', category: 'Vikingos', title: 'Vikingo de Coco', price: 4500, desc: 'Delicioso vikingo de coco 100% natural a base de leche.', image: 'images/vik-coco.png' },
+  { id: 'vik-maracumango', category: 'Vikingos', title: 'Vikingo Maracumango', price: 4500, desc: 'Exótica mezcla de maracuyá y mango a base de leche.', image: 'images/vik-maracumango.png' },
+  { id: 'vik-arequipe', category: 'Vikingos', title: 'Vikingo de Arequipe', price: 4500, desc: 'Delicioso vikingo con trozos de arequipe a base de leche.', image: 'images/vik-arequipe.png' },
+  { id: 'vik-choconutella', category: 'Vikingos', title: 'Vikingo Choconutella', price: 4500, desc: 'Cremoso vikingo de chocolate y Nutella con trozos de crema de avellana a base de leche.', image: 'images/vik-choconutella.png' },
+  { id: 'vik-curuba', category: 'Vikingos', title: 'Vikingo de Curuba', price: 4500, desc: 'Sabor tropical 100% natural a base de leche', image: 'images/vik-curuba.png' },
+  { id: 'vik-guanabana', category: 'Vikingos', title: 'Vikingo de Guanábana', price: 4500, desc: 'Cremoso vikingo de guanábana 100% natural a base de leche.', image: 'images/vik-guanabana.png' },
+  { id: 'vik-mangobiche', category: 'Vikingos', title: 'Vikingo de Mango Biche', price: 4500, desc: 'Refrescante combinación de Mango Biche 100% natural a base de agua', image: 'images/vik-mangobiche.png' },
+  { id: 'vik-mora', category: 'Vikingos', title: 'Vikingo de Mora', price: 4500, desc: '100% fruta, sabor intenso y natural a base de leche', image: 'images/vik-mora.png' },
+  { id: 'vik-ronpasas', category: 'Vikingos', title: 'Vikingo Ron con Pasas', price: 4500, desc: 'Sabor tradicional, cremoso a base de leche.', image: 'images/vik-ronpasas.png' },
+  { id: 'vik-mantecado', category: 'Vikingos', title: 'Vikingo de Mantecado', price: 4500, desc: 'Sabor tradicional, suave y cremoso a base de leche.', image: 'images/vik-mantecado.png' },
+  { id: 'vik-fresasfrutos', category: 'Vikingos', title: 'Vikingo Fresas con Frutos Rojos', price: 4500, desc: 'Combinación de fresas y mermelada de frutos rojos 100% natural a base de leche.', image: 'images/vik-fresasfrutos.png' },
+  { id: 'vik-quesobocadillo', category: 'Vikingos', title: 'Vikingo Queso con Bocadillo', price: 4500, desc: 'Deliciosa combinación entre lo salado del queso y lo dulce del bocadillo 100% natural a base de leche', image: 'images/vik-quesobocadillo.png' },
+  { id: 'vik-cafe', category: 'Vikingos', title: 'Vikingo de Café', price: 4500, desc: 'Delicioso vikingo cubierto con arequipe de café cremoso y refrescante a base de leche.', image: 'images/vik-cafe.png' },
+  { id: 'vik-oreo', category: 'Vikingos', title: 'Vikingo de Oreo', price: 4500, desc: 'Cremoso vikingo con trozos de galleta Oreo 100% natural a base de leche.', image: 'images/vik-oreo.png' },
+  { id: 'vik-pina', category: 'Vikingos', title: 'Vikingo de Piña', price: 4500, desc: 'Refrescante sabor tropical de piña natural a base de leche.', image: 'images/vik-pina.png' },
+  { id: 'vik-galleta', category: 'Vikingos', title: 'Vikingo de Galleta', price: 4500, desc: 'Refrescante y delicioso con trocitos de galleta tipo rondalla a base de leche', image: 'images/vik-galleta.png' },
+  { id: 'vik-kola', category: 'Vikingos', title: 'Vikingo Kola con Leche', price: 4500, desc: 'Clásico sabor colombiano a base de leche.', image: 'images/vik-kola.png' },
+  { id: 'vik-milo', category: 'Vikingos', title: 'Vikingo de Milo', price: 4500, desc: 'Cremoso vikingo con trocitos de milo crocante 100% natural a base de leche', image: 'images/vik-milo.png' },
+  { id: 'vik-vainillachips', category: 'Vikingos', title: 'Vikingo Vainilla Chips', price: 4500, desc: 'Delicado sabor a vainilla con chispas de chocolate 100% natural a base de leche.', image: 'images/vik-vainillachips.png' },
+  { id: 'vik-mani', category: 'Vikingos', title: 'Vikingo de Maní', price: 4500, desc: 'Vikingo cremoso con trocitos de maní 100% natural a base de leche.', image: 'images/vik-mani.png' },
+  { id: 'vik-chicle', category: 'Vikingos', title: 'Vikingo de Chicle', price: 4500, desc: 'Delicioso suave y refrescante sabor a chicle con chicle añadido a base de leche', image: 'images/vik-chicle.png' },
+  { id: 'vik-lulo', category: 'Vikingos', title: 'Vikingo de Lulo', price: 4500, desc: 'Delicioso vikingo con trocitos de lulo 100% Natural a base de leche.', image: 'images/vik-lulo.png' },
+  { id: 'vik-salpicon', category: 'Vikingos', title: 'Vikingo de Salpicón', price: 4500, desc: 'Mix de frutas tropicales finamente picadas  100% natural a base de leche.', image: 'images/vik-salpicon.png' },
+  { id: 'vik-nucita', category: 'Vikingos', title: 'Vikingo de Nucita', price: 4500, desc: 'Cremoso e irresistible vikingo combinado con chocolate blanco y chocolate negro 100% natural a base de leche.', image: 'images/vik-nucita.png' },
   //AGUAS
-  { id: 'Agua1', category: 'Aguas', title: 'Bolsa de agua', price: 500, desc: 'Bolsa de agua pura y refrescante.', image: 'images/aguaBolsa.png' }
+  { id: 'Agua1', category: 'Aguas', title: 'Agua en botella cristal', price: 2500, desc: 'Botella de agua pura y refrescante 600ml.', image: 'images/aguaBolsa.png' },
+  { id: 'Agua1', category: 'Aguas', title: 'Agua en botella cristal pequeña', price: 1500, desc: 'Botella de agua pura y refrescante 300ml.', image: 'images/aguaBolsa.png' },
+  { id: 'Agua1', category: 'Aguas', title: 'Agua en botella cristal 600ml con gas', price: 2500, desc: 'Botella de agua pura y refrescante con gas 600ml.', image: 'images/aguaBolsa.png' },
 ];
 
 const categories = [...new Set(products.map(p=>p.category))];
@@ -1221,6 +1223,7 @@ function showCartHintToast() {
 
 
 // ============Fin de codigo de Descarga QR=================
+
 
 
 
