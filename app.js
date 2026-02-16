@@ -33,8 +33,8 @@ const products = [
   { id: 'vik-nucita', category: 'Vikingos', title: 'Vikingo de Nucita', price: 4500, desc: 'Cremoso e irresistible vikingo combinado con chocolate blanco y chocolate negro 100% natural a base de leche.', image: 'images/vik-nucita.png' },
   //AGUAS
   { id: 'Agua1', category: 'Aguas', title: 'Botella agua cristal 600ml', price: 2500, desc: 'Botella de agua pura y refrescante 600ml.', image: 'images/aguaBolsa.png' },
-  { id: 'Agua1', category: 'Aguas', title: 'Pequeña botella agua cristal 300 ml', price: 1500, desc: 'Botella de agua pura y refrescante 300ml.', image: 'images/aguaBolsa.png' },
-  { id: 'Agua1', category: 'Aguas', title: 'Botella agua cristal 600ml con gas', price: 2500, desc: 'Botella de agua pura y refrescante con gas 600ml.', image: 'images/aguaBolsa.png' },
+  { id: 'Agua2', category: 'Aguas', title: 'Pequeña botella agua cristal 300 ml', price: 1500, desc: 'Botella de agua pura y refrescante 300ml.', image: 'images/aguaBolsa.png' },
+  { id: 'Agua3', category: 'Aguas', title: 'Botella agua cristal 600ml con gas', price: 2500, desc: 'Botella de agua pura y refrescante con gas 600ml.', image: 'images/aguaBolsa.png' },
 ];
 
 const categories = [...new Set(products.map(p=>p.category))];
@@ -1223,6 +1223,7 @@ function showCartHintToast() {
 
 
 // ============Fin de codigo de Descarga QR=================
+
 
 
 
