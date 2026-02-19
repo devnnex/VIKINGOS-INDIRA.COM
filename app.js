@@ -23,6 +23,7 @@ const products = [
   { id: 'vik-oreo', category: 'Vikingos', title: 'Vikingo de Oreo', price: 4500, desc: 'Cremoso vikingo con trozos de galleta Oreo 100% natural a base de leche.', image: 'images/vik-oreo.png' },
   { id: 'vik-pina', category: 'Vikingos', title: 'Vikingo de Piña', price: 4500, desc: 'Refrescante sabor tropical de piña natural a base de leche.', image: 'images/vik-pina.png' },
   { id: 'vik-galleta', category: 'Vikingos', title: 'Vikingo de Galleta', price: 4500, desc: 'Refrescante y delicioso con trocitos de galleta tipo rondalla a base de leche', image: 'images/vik-galleta.png' },
+  { id: 'vik-banano', category: 'Vikingos', title: 'Vikingo de Banano', price: 4500, desc: 'Cremoso y delicioso a base de leche con trozo de banano', image: 'images/vik-banano.png' },
   { id: 'vik-kola', category: 'Vikingos', title: 'Vikingo Kola con Leche', price: 4500, desc: 'Clásico sabor colombiano a base de leche.', image: 'images/vik-kola.png' },
   { id: 'vik-milo', category: 'Vikingos', title: 'Vikingo de Milo', price: 4500, desc: 'Cremoso vikingo con trocitos de milo crocante 100% natural a base de leche', image: 'images/vik-milo.png' },
   { id: 'vik-vainillachips', category: 'Vikingos', title: 'Vikingo Vainilla Chips', price: 4500, desc: 'Delicado sabor a vainilla con chispas de chocolate 100% natural a base de leche.', image: 'images/vik-vainillachips.png' },
@@ -1252,6 +1253,7 @@ function showCartHintToast() {
 
 
 // ============Fin de codigo de Descarga QR=================
+
 
 
 
