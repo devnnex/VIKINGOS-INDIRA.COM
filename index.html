@@ -296,31 +296,7 @@ Swal.fire({
   cancelButtonColor: '#2e7d32',   // Verde
 });
 
-
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZftgCqjpwdWhHaS0WYujINq4pyf2Ecf-oKH4lug-6bd0uaKGVWRN47qYcW1JPqdznKw/exec";
-
-async function cargarEstados() {
-  const res = await fetch(`${SCRIPT_URL}?action=status`);
-  const data = await res.json();
-
-  const statusMap = {};
-  data.forEach(p => {
-    statusMap[p.id] = p.disponible;
-  });
-
-  return statusMap;
-}
-
-
-const estados = await cargarEstados();
-
-productos.forEach(p => {
-  const disponible = estados[p.id] ?? true;
-
-  if (!disponible) {
-    // deshabilitar botón agregar
-  }
-});
+ 
 
 
     
@@ -330,6 +306,7 @@ productos.forEach(p => {
   <script src="app.js"></script>
 </body>
 </html>
+
 
 
 
