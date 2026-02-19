@@ -295,11 +295,42 @@ Swal.fire({
   confirmButtonColor: '#e91e63',  // Rosado
   cancelButtonColor: '#2e7d32',   // Verde
 });
+
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwAxCZ4-1291GPxHL4Dvc_cr3SyNNr7Cf9a9htASK6ZEx4h22Mu2Yv-xt0u5q0JIaH3Og/exec";
+
+async function cargarEstados() {
+  const res = await fetch(`${SCRIPT_URL}?action=status`);
+  const data = await res.json();
+
+  const statusMap = {};
+  data.forEach(p => {
+    statusMap[p.id] = p.disponible;
+  });
+
+  return statusMap;
+}
+
+
+const estados = await cargarEstados();
+
+productos.forEach(p => {
+  const disponible = estados[p.id] ?? true;
+
+  if (!disponible) {
+    // deshabilitar botón agregar
+  }
+});
+
+
+    
+
 </script>
 
   <script src="app.js"></script>
 </body>
 </html>
+
 
 
 
