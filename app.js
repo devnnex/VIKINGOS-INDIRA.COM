@@ -168,7 +168,7 @@ function renderProducts(cat) {
 
 // ====== 🔄 SINCRONIZACIÓN DE DISPONIBILIDAD CON GOOGLE SHEETS ======
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwoiB5wjuWak8Z0CeHenYc93M7UR7K43dPOCRGQ8RmrZjb8CAFywjqC0wGuOWBSI-GZhw/exec'; 
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCjtOiaVzHTFPtGwPfYeXa6e1uHBmFfxHuTJFu4Z8q6YMx5ceLz-1zmfrmMz961MRAGw/exec'; 
 // 👆 el mismo que usas en el admin
 
 async function fetchAvailability() {
