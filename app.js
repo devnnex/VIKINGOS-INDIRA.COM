@@ -839,7 +839,7 @@ if (method === 'domicilio') {
     Swal.fire({
       icon: 'warning',
       title: 'Debes indicar el barrio',
-      text: 'Por favor agrega el barrio en la dirección.',
+      text: 'Debes incluir la palabra Barrio en la direccion, Ejemplo: Calle 29 #55-80 Barrio Galan.',
       confirmButtonColor: '#e91e63'
     });
     return;
@@ -1253,6 +1253,7 @@ function showCartHintToast() {
 
 
 // ============Fin de codigo de Descarga QR=================
+
 
 
 
