@@ -21,6 +21,7 @@ const products = [
   { id: 'vik-quesobocadillo', category: 'Vikingos', title: 'Vikingo Queso con Bocadillo', price: 4500, desc: 'Deliciosa combinación entre lo salado del queso y lo dulce del bocadillo 100% natural a base de leche', image: 'images/vik-quesobocadillo.png' },
   { id: 'vik-cafe', category: 'Vikingos', title: 'Vikingo de Café', price: 4500, desc: 'Delicioso vikingo cubierto con arequipe de café cremoso y refrescante a base de leche.', image: 'images/vik-cafe.png' },
   { id: 'vik-oreo', category: 'Vikingos', title: 'Vikingo de Oreo', price: 4500, desc: 'Cremoso vikingo con trozos de galleta Oreo 100% natural a base de leche.', image: 'images/vik-oreo.png' },
+  { id: 'vik-tamarindo', category: 'Vikingos', title: 'Vikingo de tamarindo', price: 4500, desc: 'Delicioso vikingo hecho con pulpa natural. Recubierto con mermelada de tamarindo. A base de agua', image: 'images/vik-tamarindo.png' },
   { id: 'vik-pina', category: 'Vikingos', title: 'Vikingo de Piña', price: 4500, desc: 'Refrescante sabor tropical de piña natural a base de leche.', image: 'images/vik-pina.png' },
   { id: 'vik-galleta', category: 'Vikingos', title: 'Vikingo de Galleta', price: 4500, desc: 'Refrescante y delicioso con trocitos de galleta tipo rondalla a base de leche', image: 'images/vik-galleta.png' },
   { id: 'vik-banano', category: 'Vikingos', title: 'Vikingo de Banano', price: 4500, desc: 'Cremoso y delicioso a base de leche con trozo de banano', image: 'images/vik-banano.png' },
