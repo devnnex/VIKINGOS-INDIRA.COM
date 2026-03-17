@@ -941,6 +941,8 @@ persistCart();
 refreshCartUI();
 localStorage.removeItem('tb_cart');
 
+resetClientForm();
+
 // ⏳ RECARGA SEGURA (clave)
 setTimeout(() => {
   window.location.reload();
