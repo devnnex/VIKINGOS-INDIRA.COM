@@ -85,11 +85,10 @@ function resetClientForm() {
   const form = document.getElementById('checkout-form');
   if (!form) return;
 
-  // =========================
-  // 🧾 RESET FORMULARIO
-  // =========================
+  // Reset visual
   form.reset();
 
+  // Limpiar posibles datos guardados manualmente (por si luego implementas persistencia)
   form.querySelectorAll('input, textarea, select').forEach(el => {
     if (el.type === 'radio' || el.type === 'checkbox') {
       el.checked = false;
@@ -98,30 +97,13 @@ function resetClientForm() {
     }
   });
 
-  // Valor por defecto (UX)
+  // Opcional: dejar valores por defecto (pro UX)
   const recoger = form.querySelector('input[value="recoger"]');
   if (recoger) recoger.checked = true;
 
-  // =========================
-  // 🚚 OCULTAR CAMPOS DINÁMICOS
-  // =========================
+  // Ocultar campos dinámicos
   document.getElementById('address-label')?.classList.add('hidden');
   document.getElementById('envio-row')?.classList.add('hidden');
-
-  // =========================
-  // 💰 RESET TOTALES (CLAVE)
-  // =========================
-  const zero = '$0';
-
-  // Carrito lateral
-  document.getElementById('cart-subtotal') && (document.getElementById('cart-subtotal').textContent = zero);
-  document.getElementById('cart-delivery') && (document.getElementById('cart-delivery').textContent = zero);
-  document.getElementById('cart-total') && (document.getElementById('cart-total').textContent = zero);
-
-  // Checkout
-  document.getElementById('cart-subtotal-checkout') && (document.getElementById('cart-subtotal-checkout').textContent = zero);
-  document.getElementById('cart-delivery-checkout') && (document.getElementById('cart-delivery-checkout').textContent = zero);
-  document.getElementById('cart-total-checkout') && (document.getElementById('cart-total-checkout').textContent = zero);
 }
 
 init();
@@ -959,8 +941,10 @@ persistCart();
 refreshCartUI();
 localStorage.removeItem('tb_cart');
 
-// 🧼 RESET TOTAL + FORM
-resetClientForm(); // 👈 ESTA LÍNEA ES LA QUE TE FALTABA
+// ⏳ RECARGA SEGURA (clave)
+setTimeout(() => {
+  window.location.reload();
+}, 1500); // 1.5 segundos es perfecto
 
 // Cerrar modal checkout
 checkoutModal.classList.add('hidden');
