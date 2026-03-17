@@ -71,12 +71,39 @@ const searchInput = document.getElementById('search');
 
 // ---------- Init ----------
 function init(){
+  resetClientForm(); // 👈 AQUI
   renderCategories();
   setActiveCategory(activeCategory);
   bindEvents();
   refreshCartUI();
   renderProducts(activeCategory);
   applyAvailabilityToRendered(); // ✅ justo después del render
+}
+
+
+function resetClientForm() {
+  const form = document.getElementById('checkout-form');
+  if (!form) return;
+
+  // Reset visual
+  form.reset();
+
+  // Limpiar posibles datos guardados manualmente (por si luego implementas persistencia)
+  form.querySelectorAll('input, textarea, select').forEach(el => {
+    if (el.type === 'radio' || el.type === 'checkbox') {
+      el.checked = false;
+    } else {
+      el.value = '';
+    }
+  });
+
+  // Opcional: dejar valores por defecto (pro UX)
+  const recoger = form.querySelector('input[value="recoger"]');
+  if (recoger) recoger.checked = true;
+
+  // Ocultar campos dinámicos
+  document.getElementById('address-label')?.classList.add('hidden');
+  document.getElementById('envio-row')?.classList.add('hidden');
 }
 
 init();
@@ -813,7 +840,9 @@ checkoutForm.addEventListener('change', updateCheckoutTotals);
 
 
 
+
 checkoutForm.addEventListener('submit', (e) => {
+  
   const submitBtn = checkoutForm.querySelector('button[type="submit"]');
   e.preventDefault();
 
@@ -825,6 +854,28 @@ checkoutForm.addEventListener('submit', (e) => {
   const address = fd.get('address')?.trim() || '';
   const notes = fd.get('notes')?.trim() || '';
 
+
+  // 🔎 Validación de barrio obligatorio en domicilio
+if (method === 'domicilio') {
+  const addressLower = address.toLowerCase();
+  const hasBarrio = 
+    addressLower.includes('barrio') ||
+    addressLower.includes('barr.') ||
+    addressLower.includes('br.');
+
+  if (!hasBarrio) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Debes indicar el barrio',
+      text: 'Debes incluir la palabra Barrio en la direccion, Ejemplo: Calle 29 #55-80 Barrio Galan.',
+      confirmButtonColor: '#e91e63'
+    });
+    return;
+  }
+}
+
+
+
   let textParts = [];
 
   // Cabecera
@@ -832,11 +883,7 @@ checkoutForm.addEventListener('submit', (e) => {
   textParts.push(`👤 Cliente: ${clientName}`);
   textParts.push(`📞 Teléfono: ${clientPhone}`);
   textParts.push(`🚚 Tipo: ${method}`);
-  
-  if (method === 'domicilio') {
-    textParts.push(`🏠 Dirección: ${address}`);
-  }
-  
+  if (method === 'domicilio') textParts.push(`🏠 Dirección: ${address}`);
   textParts.push(`💳 Pago: ${payment}`);
   textParts.push('');
   textParts.push('🍨 *Detalle del pedido:*');
@@ -844,6 +891,7 @@ checkoutForm.addEventListener('submit', (e) => {
   let subtotal = 0;
 
   cart.forEach(item => {
+    // Calcular precio de extras individualmente
     const extras = item.extras || [];
     const extrasLines = extras.map(e => `   ➕ ${e.qty}x ${e.name} ($${numberWithCommas(e.price * e.qty)})`).join('\n');
     const extrasSum = extras.reduce((sum, e) => sum + e.price * e.qty, 0);
@@ -851,9 +899,11 @@ checkoutForm.addEventListener('submit', (e) => {
     const itemTotal = (item.price + extrasSum) * item.qty;
     subtotal += itemTotal;
 
+    // Mostrar solo precio del artículo base + extras detallados
     textParts.push(`${item.qty}x ${item.title} — *$${numberWithCommas(item.price * item.qty)}*`);
     if (extrasLines) textParts.push(extrasLines);
 
+    // Si hay toppings removidos
     if (item.removed && item.removed.length) {
       textParts.push(`   ⚠️ Toppings removidos: ${item.removed.join(', ')}`);
     }
@@ -882,17 +932,17 @@ checkoutForm.addEventListener('submit', (e) => {
   const msg = encodeURIComponent(textParts.join('\n'));
   const waUrl = `https://wa.me/${bp}?text=${msg}`;
 
-  // 📲 ABRIR WHATSAPP INMEDIATAMENTE
-  window.location.href = waUrl;
+ // 📲 ABRIR WHATSAPP INMEDIATAMENTE (FUNCIONA EN CELULAR)
+window.location.href = waUrl;
 
-  // 🧹 Vaciar carrito y limpiar UI
-  cart = [];
-  persistCart();
-  refreshCartUI();
-  localStorage.removeItem('tb_cart');
+// 🧹 Vaciar carrito
+cart = [];
+persistCart();
+refreshCartUI();
+localStorage.removeItem('tb_cart');
 
-  // Cerrar modal checkout
-  checkoutModal.classList.add('hidden');
+// Cerrar modal checkout
+checkoutModal.classList.add('hidden');
 });
 
 
