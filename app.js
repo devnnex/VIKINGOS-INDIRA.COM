@@ -18,6 +18,7 @@ const products = [
   { id: 'vik-ronpasas', category: 'Vikingos', title: 'Vikingo Ron con Pasas', price: 4500, desc: 'Sabor tradicional, cremoso a base de leche.', image: 'images/vik-ronpasas.png' },
   { id: 'vik-mantecado', category: 'Vikingos', title: 'Vikingo de Mantecado', price: 4500, desc: 'Sabor tradicional, suave y cremoso a base de leche.', image: 'images/vik-mantecado.png' },
   { id: 'vik-fresasfrutos', category: 'Vikingos', title: 'Vikingo Fresas con Frutos Rojos', price: 4500, desc: 'Combinación de fresas y mermelada de frutos rojos 100% natural a base de leche.', image: 'images/vik-fresasfrutos.png' },
+  { id: 'vik-arrozconleche', category: 'Vikingos', title: 'Vikingo de Arroz con Leche', price: 4500, desc: 'Granos de arroz suaves en cada bocado, mezclados con una base láctea muy cremosa con unas cuantas uvas pasas.', image: 'images/vik-arrozconleche.png' },
   { id: 'vik-quesobocadillo', category: 'Vikingos', title: 'Vikingo Queso con Bocadillo', price: 4500, desc: 'Deliciosa combinación entre lo salado del queso y lo dulce del bocadillo 100% natural a base de leche', image: 'images/vik-quesobocadillo.png' },
   { id: 'vik-cafe', category: 'Vikingos', title: 'Vikingo de Café', price: 4500, desc: 'Delicioso vikingo cubierto con arequipe de café cremoso y refrescante a base de leche.', image: 'images/vik-cafe.png' },
   { id: 'vik-oreo', category: 'Vikingos', title: 'Vikingo de Oreo', price: 4500, desc: 'Cremoso vikingo con trozos de galleta Oreo 100% natural a base de leche.', image: 'images/vik-oreo.png' },
