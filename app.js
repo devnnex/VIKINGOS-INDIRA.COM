@@ -43,7 +43,8 @@ const products = [
 const categories = [...new Set(products.map(p=>p.category))];
 
 // ---------- Estado ----------
-let cart = JSON.parse(localStorage.getItem('tb_cart') || '[]');
+localStorage.removeItem('tb_cart');
+let cart = [];
 let activeCategory = 'Vikingos';
 
 // ---------- DOM refs ----------
@@ -99,12 +100,12 @@ function resetClientForm() {
   });
 
   // Opcional: dejar valores por defecto (pro UX)
-  const recoger = form.querySelector('input[value="recoger"]');
-  if (recoger) recoger.checked = true;
+  const domicilio = form.querySelector('input[value="domicilio"]');
+  if (domicilio) domicilio.checked = true;
 
   // Ocultar campos dinámicos
-  document.getElementById('address-label')?.classList.add('hidden');
-  document.getElementById('envio-row')?.classList.add('hidden');
+  document.getElementById('address-label')?.classList.remove('hidden');
+  document.getElementById('envio-row')?.classList.remove('hidden');
 }
 
 init();
@@ -760,8 +761,8 @@ const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   // 🔹 Reset formulario
   checkoutForm.reset();
-  document.getElementById('address-label').classList.add('hidden');
-  document.getElementById('envio-row').classList.add('hidden');
+  document.getElementById('address-label').classList.remove('hidden');
+  document.getElementById('envio-row').classList.remove('hidden');
 
   // 🔹 Mostrar modal
   checkoutModal.classList.remove('hidden');
