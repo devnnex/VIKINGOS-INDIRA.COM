@@ -147,17 +147,17 @@
 
             <div class="radio-row" role="radiogroup" aria-label="Método de entrega">
   <label class="radio-btn">
-    <input type="radio" name="method" value="recoger" checked>
+    <input type="radio" name="method" value="recoger">
     <span>Recoger</span>
   </label>
   <label class="radio-btn">
-    <input type="radio" name="method" value="domicilio">
+    <input type="radio" name="method" value="domicilio" checked>
     <span>Domicilio</span>
   </label>
 </div>
 
 
-            <label id="address-label" class="hidden">Dirección incluyendo el barrio
+            <label id="address-label">Dirección incluyendo el barrio
               <input name="address" type="text" placeholder="LA DIRECCION COMPLETA CON BARRIO ">
             </label>
 
@@ -202,7 +202,7 @@
               <textarea name="notes" rows="2" placeholder="Ej: Deja tus notas aqui"></textarea>
             </label> -->
 
-            <div id="envio-row" class="checkout-row hidden">
+            <div id="envio-row" class="checkout-row">
               <span>Envío</span>
               <strong id="cart-delivery">$0</strong>
             </div>
