@@ -30,6 +30,13 @@
 </head>
 
 <body>
+  <div id="availability-loader" class="availability-loader" role="status" aria-live="polite">
+    <div class="loader-card">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <p>Cargando sabores disponibles</p>
+    </div>
+  </div>
+
   <div id="app" class="app-container">
 
     <!-- ===== HEADER ===== -->
@@ -124,15 +131,22 @@
         <!-- Botón cerrar -->
         <button type="button" id="checkout-close" class="icon-btn close-btn" aria-label="Cerrar checkout">✕</button>
 
-        <form id="checkout-form">
+        <form id="checkout-form" novalidate>
           <!-- 🔸 Paso 1: Datos básicos -->
           <div class="checkout-step active" id="step1">
-            <label>Nombre
-              <input name="name" type="text" required placeholder="Tu nombre">
+            <div class="checkout-section-title">
+              <span>Tus datos</span>
+              <small>Para confirmar el pedido</small>
+            </div>
+
+            <label class="checkout-field" data-field="name">Nombre
+              <input name="name" type="text" required autocomplete="name" placeholder="Tu nombre">
+              <span class="field-status" aria-hidden="true"></span>
             </label>
 
-            <label>Teléfono
-              <input name="phone" type="tel" required placeholder="Ej: 3001234567">
+            <label class="checkout-field" data-field="phone">Teléfono
+              <input name="phone" type="tel" required inputmode="tel" autocomplete="tel" placeholder="Ej: 3001234567">
+              <span class="field-status" aria-hidden="true"></span>
             </label>
 
             <div class="checkout-actions">
@@ -144,6 +158,10 @@
           <!-- 🔸 Paso 2: Detalles de entrega/pago -->
           <div class="checkout-step" id="step2">
             <div class="client-summary" id="client-summary"></div>
+            <div class="checkout-section-title">
+              <span>Entrega y pago</span>
+              <small>Revisa que todo quede correcto</small>
+            </div>
 
             <div class="radio-row" role="radiogroup" aria-label="Método de entrega">
   <label class="radio-btn">
@@ -157,16 +175,18 @@
 </div>
 
 
-            <label id="address-label">Dirección incluyendo el barrio
+            <label id="address-label" class="checkout-field" data-field="address">Dirección incluyendo el barrio
               <input name="address" type="text" placeholder="LA DIRECCION COMPLETA CON BARRIO ">
+              <span class="field-status" aria-hidden="true"></span>
             </label>
 
-            <label>Método de pago
+            <label class="checkout-field select-field" data-field="payment">Método de pago
               <select name="payment" id="payment-method" required>
                 <option value="" disabled selected>Selecciona una opción</option>
                 <option value="transferencia">Transferencia</option>
                 <option value="efectivo">Efectivo</option>
               </select>
+              <span class="field-status" aria-hidden="true"></span>
             </label>
 
             <div id="transfer-info" class="hidden transfer-box">
