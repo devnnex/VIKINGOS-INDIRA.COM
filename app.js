@@ -108,12 +108,29 @@ function readCachedAvailability() {
   }
 }
 
+function mergeAvailabilityStatus(prevStatus, nextStatus) {
+  const merged = { ...(prevStatus || {}) };
+
+  Object.keys(nextStatus || {}).forEach(id => {
+    merged[id] = Boolean(nextStatus[id]);
+  });
+
+  return merged;
+}
+
 async function getAvailabilityStatus() {
   try {
     const res = await fetch(SCRIPT_URL + '?t=' + Date.now());
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    const status = parseAvailabilityList(data);
+    const fetchedStatus = parseAvailabilityList(data);
+    const cachedStatus = readCachedAvailability();
+
+    if (Object.keys(fetchedStatus).length === 0) {
+      return cachedStatus;
+    }
+
+    const status = mergeAvailabilityStatus(cachedStatus, fetchedStatus);
     localStorage.setItem('productStatus', JSON.stringify(status));
     return status;
   } catch (err) {
@@ -368,7 +385,12 @@ function applyAvailabilityToRendered(productId = null, status = readCachedAvaila
     const addBtn = card.querySelector('.add');
     if (!addBtn) return;
 
-    const disponible = status[id] === undefined ? true : Boolean(status[id]);
+    const cachedStatus = readCachedAvailability();
+    const previousValue = cachedStatus[id];
+    const nextValue = status[id];
+    const disponible = nextValue === undefined
+      ? previousValue !== false
+      : Boolean(nextValue);
 
     // Reset visual
     addBtn.disabled = false;
