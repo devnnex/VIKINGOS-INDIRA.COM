@@ -372,6 +372,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const navBtns = document.querySelectorAll('.nav-btn');
   const productosCatalog = document.getElementById('productos');
   const extrasCatalog = document.getElementById('extras');
+  const searchInput = document.getElementById('search-input');
 
   // ======= DATA DE PRODUCTOS =======
   const productos = [
@@ -466,6 +467,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   render(productosCatalog, productos, 'productos');
   render(extrasCatalog, extras, 'extras');
 
+  // --- BUSCADOR EN TIEMPO REAL ---
+  function normalizeSearchText(text) {
+    return text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+  }
+
+  searchInput.addEventListener('input', () => {
+    const searchTerm = normalizeSearchText(searchInput.value);
+
+    document.querySelectorAll('.product-card').forEach(card => {
+      const cardText = normalizeSearchText(card.textContent);
+      card.style.display = cardText.includes(searchTerm) ? '' : 'none';
+    });
+  });
+
   // --- 3. ACTUALIZAR GOOGLE SHEETS (POST) ---
   async function updateGoogleSheet(id, disponible) {
     try {
@@ -517,7 +536,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 </script>
 </body>
 </html>
-
 
 
 
